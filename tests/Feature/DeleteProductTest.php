@@ -2,15 +2,18 @@
 
 namespace Tests\Feature;
 
+use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Nette\Utils\Random;
 
-class CreateProductTest extends TestCase
+class DeleteProductTest extends TestCase
 {
-   public function test_a_product_can_be_created():void
-   {
+    /**
+     * A basic feature test example.
+     */
+    public function a_product_can_be_deleted(): void
+    {
         $productData = [
             "name" => "Limpiatrastes",
             "description" => "Jabon liquido especializado para limpiar los trastes",
@@ -19,10 +22,11 @@ class CreateProductTest extends TestCase
             "category_id" => 1,
             "code" => 454879456
         ];
-        
-        $response = $this->post('/products', $productData);
 
-        $response->assertStatus(302);
-        $this->assertDatabaseHas('products', $productData);
-   }
+        $product = Product::create($productData);
+        $id = $product->id;
+
+        $response = $this->post('/deleteProduct/{id}');
+    }
+
 }

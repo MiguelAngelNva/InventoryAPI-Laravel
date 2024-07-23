@@ -7,5 +7,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/products', [ProductController::class, 'index'])->name("index");
-Route::post('/products', [ProductController::class, 'registerProduct'])->name('registerProduct');
+Route::get('/products', [ProductController::class, 'ProductController@index'])->name("index");
+Route::post('/products', [ProductController::class, 'ProductController@registerProduct'])->name('registerProduct');
+Route::put('/products/{id}', [ProductController::class, 'ProductController@editProduct'])->name('editProduct');
+Route::post('/deleteProduct/{id}', [ProductController::class, 'ProductController@deleteProduct'])->name('deleteProduct');
